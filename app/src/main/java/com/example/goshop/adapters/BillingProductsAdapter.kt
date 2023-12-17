@@ -10,9 +10,8 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.goshop.R
-import com.example.goshop.databinding.BillingProductsRvItemBinding
 import com.example.goshop.data.CartProduct
-
+import com.example.goshop.databinding.BillingProductsRvItemBinding
 import com.example.goshop.helper.getProductPrice
 
 class BillingProductsAdapter: Adapter<BillingProductsAdapter.BillingProductsViewHolder>() {
@@ -21,8 +20,12 @@ class BillingProductsAdapter: Adapter<BillingProductsAdapter.BillingProductsView
 
         fun bind(billingProduct: CartProduct) {
             binding.apply {
-                Glide.with(itemView).load(billingProduct.product.images[0]).centerCrop().placeholder(
-                    R.drawable.productplaceholder).into(imageCartProduct)
+                try {
+                    Glide.with(itemView).load(billingProduct.product.images[0]).centerCrop().placeholder(
+                        R.drawable.productplaceholder).into(imageCartProduct)
+                } catch (e: Exception) {
+                    Glide.with(itemView).load(R.drawable.productplaceholder).centerCrop().into(imageCartProduct)
+                }
                 tvProductCartName.text = billingProduct.product.name
                 tvBillingProductQuantity.text = billingProduct.quantity.toString()
 

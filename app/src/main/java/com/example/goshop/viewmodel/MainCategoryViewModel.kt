@@ -34,7 +34,7 @@ class MainCategoryViewModel @Inject constructor(
         fetchBestProducts()
     }
 
-    fun fetchSpecialProducts() {
+    private fun fetchSpecialProducts() {
         viewModelScope.launch {
             _specialProducts.emit(Resource.Loading())
         }
@@ -52,7 +52,7 @@ class MainCategoryViewModel @Inject constructor(
     }
 
 
-    fun fetchBestDeals() {
+    private fun fetchBestDeals() {
         viewModelScope.launch {
             _bestDealsProducts.emit(Resource.Loading())
         }

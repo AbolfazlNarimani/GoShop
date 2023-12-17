@@ -20,6 +20,12 @@ class SpecialProductsAdapter :
         fun bind(product: Product) {
             binding.apply {
                 Glide.with(itemView).load(product.images[0]).centerCrop().placeholder(R.drawable.productplaceholder).into(imageSpecialRvItem)
+                try {
+                    Glide.with(itemView).load(product.images[0]).centerCrop().placeholder(
+                        R.drawable.productplaceholder).into(imageSpecialRvItem)
+                } catch (e: Exception) {
+                    Glide.with(itemView).load(R.drawable.productplaceholder).centerCrop().into(imageSpecialRvItem)
+                }
                 tvSpecialProductName.text = product.name
                 tvSpecialPrdouctPrice.text = product.price.toString()
             }

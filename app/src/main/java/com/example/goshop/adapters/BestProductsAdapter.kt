@@ -13,6 +13,7 @@ import com.example.goshop.databinding.ProductRvItemBinding
 import com.example.goshop.data.Product
 
 import com.example.goshop.helper.getProductPrice
+import java.lang.Exception
 
 class BestProductsAdapter : RecyclerView.Adapter<BestProductsAdapter.BestProductsViewHolder>() {
 
@@ -26,7 +27,11 @@ class BestProductsAdapter : RecyclerView.Adapter<BestProductsAdapter.BestProduct
                 if (product.offerPercentage == null)
                     tvNewPrice.visibility = View.INVISIBLE
 
-                Glide.with(itemView).load(product.images[0]).centerCrop().placeholder(R.drawable.productplaceholder).into(imgProduct)
+                try {
+                    Glide.with(itemView).load(product.images[0]).centerCrop().placeholder(R.drawable.productplaceholder).into(imgProduct)
+                }catch (E : Exception){
+                    Glide.with(itemView).load(R.drawable.productplaceholder).centerCrop().into(imgProduct)
+                }
                 tvPrice.text = "$ ${product.price}"
                 tvName.text = product.name
             }
