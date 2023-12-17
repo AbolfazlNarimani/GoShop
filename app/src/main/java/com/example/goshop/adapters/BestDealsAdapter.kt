@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.goshop.R
 import com.example.goshop.databinding.BestDealsRvItemBinding
 import com.example.goshop.data.Product
+import java.lang.Exception
 
 
 class BestDealsAdapter : RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHolder>() {
@@ -17,7 +18,12 @@ class BestDealsAdapter : RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHold
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             binding.apply {
-                Glide.with(itemView).load(product.images[0]).centerCrop().placeholder(R.drawable.productplaceholder).into(imgBestDeal)
+                try {
+                    Glide.with(itemView).load(product.images[0]).centerCrop().placeholder(R.drawable.productplaceholder).into(imgBestDeal)
+                }catch (E : Exception){
+                    Glide.with(itemView).load(R.drawable.productplaceholder).centerCrop().into(imgBestDeal)
+                }
+
                 product.offerPercentage?.let {
                     val remainingPricePercentage = 1f - it
                     val priceAfterOffer = remainingPricePercentage * product.price
@@ -28,6 +34,8 @@ class BestDealsAdapter : RecyclerView.Adapter<BestDealsAdapter.BestDealsViewHold
             }
         }
     }
+
+
 
     private val diffCallback = object : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {

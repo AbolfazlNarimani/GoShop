@@ -27,7 +27,6 @@ class AddressAdapter : Adapter<AddressAdapter.AddressViewHolder>() {
             }
         }
 
-
     }
 
     private val diffUtil = object : DiffUtil.ItemCallback<Address>() {

@@ -17,7 +17,11 @@ class ViewPager2Images : RecyclerView.Adapter<ViewPager2Images.ViewPager2ImagesV
         ViewHolder(binding.root) {
 
             fun bind(imagePath: String){
-                Glide.with(itemView).load(imagePath).centerCrop().placeholder(R.drawable.productplaceholder).into(binding.imageProductDetails)
+                try {
+                    Glide.with(itemView).load(imagePath).centerCrop().placeholder(R.drawable.productplaceholder).into(binding.imageProductDetails)
+                } catch (e: Exception) {
+                    Glide.with(itemView).load(R.drawable.productplaceholder).centerCrop().into(binding.imageProductDetails)
+                }
             }
     }
 

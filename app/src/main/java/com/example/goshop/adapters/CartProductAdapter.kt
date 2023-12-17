@@ -21,7 +21,13 @@ class CartProductAdapter: RecyclerView.Adapter<CartProductAdapter.CartProductsVi
 
         fun bind(cartProduct: CartProduct) {
             binding.apply {
-                Glide.with(itemView).load(cartProduct.product.images[0]).centerCrop().placeholder(R.drawable.productplaceholder).into(imageCartProduct)
+
+                try {
+                    Glide.with(itemView).load(cartProduct.product.images[0]).centerCrop().placeholder(
+                        R.drawable.productplaceholder).into(imageCartProduct)
+                } catch (e: Exception) {
+                    Glide.with(itemView).load(R.drawable.productplaceholder).centerCrop().into(imageCartProduct)
+                }
                 tvProductCartName.text = cartProduct.product.name
                 tvCartProductQuantity.text = cartProduct.quantity.toString()
 
